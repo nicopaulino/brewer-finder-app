@@ -1,22 +1,23 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import axios from 'axios';
+import {GoogleMap, useLoadScript, Marker} from '@react-google-maps/api'
+import Map from './Map';
+import Breweries from './Breweries';
+
 
 function App() {
+
+  const [flag, setFlag] = useState(false);
+
   return (
+  
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {flag ? 
+        <Map/> : 
+        <Breweries/>
+        }
       </header>
     </div>
   );

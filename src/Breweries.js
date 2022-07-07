@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import './App.css';
+import './Breweries.css';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import Accordion from 'react-bootstrap/Accordion';
@@ -23,6 +23,10 @@ function Breweries() {
     lng: -90.0639242
   })
 
+  // const getBrews = () => axios.get(`/api/breweries`);
+
+  // const [brews, setBrews] = useState([]);
+
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -44,6 +48,7 @@ function Breweries() {
     axios.get('https://api.openbrewerydb.org/breweries?by_city=new_orleans')
         .then(response => setBarsList(response.data))
         .then(console.log(barsList));
+
   }, []);
 
   // const generateBars = () => {
@@ -54,25 +59,27 @@ function Breweries() {
 
   return (
   
-    <div className="App">
-      <header className="App-header">
+    <div className="Breweries-page">
+      <header className="Breweries-header">
         <h1>Breweries in New Orleans</h1>
         {/* <button onClick={() => generateBars()}>Get Bars</button> */}
-        <Accordion style={{ width: '90%', color: 'black' }}>
+        <Accordion style={{ width: '50rem', color: 'black' }}>
                 {barsList.map((bar, i) => {
                     return (
                             <Accordion.Item eventKey={i} key={i}>
                             <Accordion.Header onClick={() => setCenter({lat: parseFloat(bar.latitude), lng: parseFloat(bar.longitude)})}>{bar.name}</Accordion.Header>
-                            <Accordion.Body>
+                            <Accordion.Body style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                              <div className="Brewery-info">
                                 <div>Brewery Type: {bar.brewery_type}</div>
                                 <div>Address: {bar.street}</div>
                                 <div>{`${bar.city}, ${bar.state} ${bar.postal_code}`}</div>
                                 {bar.website_url ? <a target="_blank" href={`${bar.website_url}`}>Website</a> : null}
+                              </div>
                                 { isLoaded && bar.latitude ? (
                                     <GoogleMap
                                       mapContainerStyle={containerStyle}
                                       center={center}
-                                      // zoom={20}
+                                      zoom={19}
                                       onLoad={onLoad}
                                       onUnmount={onUnmount}
                                     >

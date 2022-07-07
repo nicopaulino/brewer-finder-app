@@ -1,0 +1,19 @@
+.Breweries-page {
+    text-align: center;
+  }
+  
+  
+  
+  .Breweries-header {
+    background-color: #5a3d24;
+    /* min-height: 100vh; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* font-size: calc(10px + 2vmin);  */
+    justify-content: center; 
+    color: white;
+  }
+  
+  
+  
